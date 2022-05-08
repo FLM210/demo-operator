@@ -20,6 +20,9 @@ func MutateDeployment(Gohttpserver *v1alpha1.Gohtpserver, dep *appsv1.Deployment
 	}
 	dep.Spec = appsv1.DeploymentSpec{
 		Replicas: Gohttpserver.Spec.Replicas,
+		Selector: &metav1.LabelSelector{MatchLabels: map[string]string{
+			GohtpserverLabelkey: Gohttpserver.Spec.Name,
+		}},
 		Template: corev1.PodTemplateSpec{
 			ObjectMeta: metav1.ObjectMeta{
 				Labels: map[string]string{

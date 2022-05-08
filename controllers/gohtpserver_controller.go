@@ -74,8 +74,8 @@ func (r *GohtpserverReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 
 	// CreateOrUpdate Deployment
 	var dep appsv1.Deployment
-	dep.Name = Gohttpserver.Name
-	dep.Namespace = Gohttpserver.Namespace
+	dep.Name = Gohttpserver.Spec.Name
+	dep.Namespace = Gohttpserver.Spec.Namespace
 	or, err = ctrl.CreateOrUpdate(ctx, r.Client, &dep, func() error {
 		MutateDeployment(&Gohttpserver, &dep)
 		return controllerutil.SetControllerReference(&Gohttpserver, &dep, r.Scheme)
