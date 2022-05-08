@@ -1,6 +1,0 @@
-apiVersion: apps.dlbppx.online/v1alpha1
-kind: gohttpserver
-metadata:
-  name: gohttpserver-sample
-spec:
-  # TODO(user): Add fields here
