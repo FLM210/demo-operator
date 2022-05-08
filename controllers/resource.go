@@ -3,20 +3,19 @@
 package controllers
 
 import (
-	"github.com/FLM210/demo-operator/api/v1alpha1"
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 var (
-	Gohtpserver         = "dlbppx.online/Gohttpserver"
-	GohtpserverLabelkey = "app"
+	gohttpserver         = "dlbppx.online/Gohttpserver"
+	gohttpserverLabelkey = "app"
 )
 
-func MutateDeployment(Gohttpserver *v1alpha1.Gohtpserver, dep *appsv1.Deployment) {
+func MutateDeployment(Gohttpserver *v1alpha1.gohttpserver, dep *appsv1.Deployment) {
 	dep.Labels = map[string]string{
-		GohtpserverLabelkey: "gohtpserver",
+		gohttpserverLabelkey: "gohttpserver",
 	}
 	dep.Namespace = Gohttpserver.Spec.Namespace
 	dep.Name = Gohttpserver.Spec.Name
@@ -25,7 +24,7 @@ func MutateDeployment(Gohttpserver *v1alpha1.Gohtpserver, dep *appsv1.Deployment
 		Template: corev1.PodTemplateSpec{
 			ObjectMeta: metav1.ObjectMeta{
 				Labels: map[string]string{
-					GohtpserverLabelkey: Gohttpserver.Spec.Name,
+					gohttpserverLabelkey: Gohttpserver.Spec.Name,
 				},
 				Name: Gohttpserver.Spec.Name,
 			},
@@ -36,7 +35,7 @@ func MutateDeployment(Gohttpserver *v1alpha1.Gohtpserver, dep *appsv1.Deployment
 	}
 }
 
-func newContainers(Gohttpserver *v1alpha1.Gohtpserver) []corev1.Container {
+func newContainers(Gohttpserver *v1alpha1.gohttpserver) []corev1.Container {
 	return []corev1.Container{
 		corev1.Container{
 			Name:  Gohttpserver.Spec.Name,
@@ -51,13 +50,13 @@ func newContainers(Gohttpserver *v1alpha1.Gohtpserver) []corev1.Container {
 	}
 }
 
-func MutateSvc(Gohttpserver *v1alpha1.Gohtpserver, svc *corev1.Service) {
+func MutateSvc(Gohttpserver *v1alpha1.gohttpserver, svc *corev1.Service) {
 	svc.Labels = map[string]string{
-		GohtpserverLabelkey: Gohttpserver.Spec.Name,
+		gohttpserverLabelkey: Gohttpserver.Spec.Name,
 	}
 	svc.Spec = corev1.ServiceSpec{
 		Selector: map[string]string{
-			GohtpserverLabelkey: Gohttpserver.Spec.Name,
+			gohttpserverLabelkey: Gohttpserver.Spec.Name,
 		},
 		Ports: []corev1.ServicePort{
 			corev1.ServicePort{

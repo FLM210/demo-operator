@@ -1,13 +1,13 @@
-# permissions for end users to edit gohtpservers.
+# permissions for end users to edit gohttpservers.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: gohtpserver-editor-role
+  name: gohttpserver-editor-role
 rules:
 - apiGroups:
   - apps.dlbppx.online
   resources:
-  - gohtpservers
+  - gohttpservers
   verbs:
   - create
   - delete
@@ -19,6 +19,6 @@ rules:
 - apiGroups:
   - apps.dlbppx.online
   resources:
-  - gohtpservers/status
+  - gohttpservers/status
   verbs:
   - get

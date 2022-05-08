@@ -10,7 +10,7 @@ resources:
   controller: true
   domain: dlbppx.online
   group: apps
-  kind: Gohtpserver
+  kind: gohttpserver
   path: github.com/FLM210/demo-operator/api/v1alpha1
   version: v1alpha1
 version: "3"

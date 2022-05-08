@@ -5,14 +5,14 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.8.0
   creationTimestamp: null
-  name: gohtpservers.apps.dlbppx.online
+  name: gohttpservers.apps.dlbppx.online
 spec:
   group: apps.dlbppx.online
   names:
-    kind: Gohtpserver
-    listKind: GohtpserverList
-    plural: gohtpservers
-    singular: gohtpserver
+    kind: gohttpserver
+    listKind: gohttpserverList
+    plural: gohttpservers
+    singular: gohttpserver
   scope: Namespaced
   versions:
   - additionalPrinterColumns:
@@ -27,7 +27,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Gohtpserver is the Schema for the gohtpservers API
+        description: gohttpserver is the Schema for the gohttpservers API
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -42,12 +42,12 @@ spec:
           metadata:
             type: object
           spec:
-            description: GohtpserverSpec defines the desired state of Gohtpserver
+            description: gohttpserverSpec defines the desired state of gohttpserver
             properties:
               image:
                 type: string
               name:
-                description: Foo is an example field of Gohtpserver. Edit gohtpserver_types.go
+                description: Foo is an example field of gohttpserver. Edit gohttpserver_types.go
                   to remove/update
                 type: string
               namespace:
@@ -57,7 +57,7 @@ spec:
                 type: integer
             type: object
           status:
-            description: GohtpserverStatus defines the observed state of Gohtpserver
+            description: gohttpserverStatus defines the observed state of gohttpserver
             properties:
               availablereplicas:
                 type: integer

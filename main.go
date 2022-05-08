@@ -32,7 +32,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	appsv1alpha1 "github.com/FLM210/demo-operator/api/v1alpha1"
-	"github.com/FLM210/demo-operator/controllers"
 	//+kubebuilder:scaffold:imports
 )
 
@@ -78,11 +77,11 @@ func main() {
 		os.Exit(1)
 	}
 
-	if err = (&controllers.GohtpserverReconciler{
+	if err = (&controllers.gohttpserverReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
 	}).SetupWithManager(mgr); err != nil {
-		setupLog.Error(err, "unable to create controller", "controller", "Gohtpserver")
+		setupLog.Error(err, "unable to create controller", "controller", "gohttpserver")
 		os.Exit(1)
 	}
 	//+kubebuilder:scaffold:builder

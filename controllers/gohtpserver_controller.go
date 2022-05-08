@@ -26,33 +26,31 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/log"
-
-	appsv1alpha1 "github.com/FLM210/demo-operator/api/v1alpha1"
 )
 
-// GohtpserverReconciler reconciles a Gohtpserver object
-type GohtpserverReconciler struct {
+// gohttpserverReconciler reconciles a gohttpserver object
+type gohttpserverReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=apps.dlbppx.online,resources=gohtpservers,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=apps.dlbppx.online,resources=gohtpservers/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=apps.dlbppx.online,resources=gohtpservers/finalizers,verbs=update
+//+kubebuilder:rbac:groups=apps.dlbppx.online,resources=gohttpservers,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=apps.dlbppx.online,resources=gohttpservers/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=apps.dlbppx.online,resources=gohttpservers/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
-// the Gohtpserver object against the actual cluster state, and then
+// the gohttpserver object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
 //
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.11.2/pkg/reconcile
-func (r *GohtpserverReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+func (r *gohttpserverReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
-	var Gohttpserver appsv1alpha1.Gohtpserver
+	var Gohttpserver appsv1alpha1.gohttpserver
 	if err := r.Get(ctx, req.NamespacedName, &Gohttpserver); err != nil {
 		// EtcdCluster was gone，skip
 		return ctrl.Result{}, client.IgnoreNotFound(err)
@@ -89,8 +87,8 @@ func (r *GohtpserverReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *GohtpserverReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *gohttpserverReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&appsv1alpha1.Gohtpserver{}).
+		For(&appsv1alpha1.gohttpserver{}).
 		Complete(r)
 }

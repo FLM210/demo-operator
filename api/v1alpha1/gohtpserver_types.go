@@ -23,20 +23,20 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// GohtpserverSpec defines the desired state of Gohtpserver
-type GohtpserverSpec struct {
+// gohttpserverSpec defines the desired state of gohttpserver
+type gohttpserverSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Gohtpserver. Edit gohtpserver_types.go to remove/update
+	// Foo is an example field of gohttpserver. Edit gohttpserver_types.go to remove/update
 	Name      string `json:"name,omitempty"`
 	Namespace string `json:"namespace,omitempty"`
 	Image     string `json:"image,omitempty"`
 	Replicas  *int32 `json:"replicas,omitempty"`
 }
 
-// GohtpserverStatus defines the observed state of Gohtpserver
-type GohtpserverStatus struct {
+// gohttpserverStatus defines the observed state of gohttpserver
+type gohttpserverStatus struct {
 	AvailableReplicas int `json:"availablereplicas,omitempty"`
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
@@ -46,24 +46,24 @@ type GohtpserverStatus struct {
 //+kubebuilder:subresource:status
 //+kubebuilder:printcolumn:name="replicas",type="integer",JSONPath=".spec.replicas",description="Replicas of Gohttpserver"
 //+kubebuilder:printcolumn:name="Image",type="string",JSONPath=".spec.image",description="Use Image"
-// Gohtpserver is the Schema for the gohtpservers API
-type Gohtpserver struct {
+// gohttpserver is the Schema for the gohttpservers API
+type gohttpserver struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   GohtpserverSpec   `json:"spec,omitempty"`
-	Status GohtpserverStatus `json:"status,omitempty"`
+	Spec   gohttpserverSpec   `json:"spec,omitempty"`
+	Status gohttpserverStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// GohtpserverList contains a list of Gohtpserver
-type GohtpserverList struct {
+// gohttpserverList contains a list of gohttpserver
+type gohttpserverList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Gohtpserver `json:"items"`
+	Items           []gohttpserver `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Gohtpserver{}, &GohtpserverList{})
+	SchemeBuilder.Register(&gohttpserver{}, &gohttpserverList{})
 }
