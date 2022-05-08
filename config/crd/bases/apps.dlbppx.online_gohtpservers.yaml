@@ -35,13 +35,18 @@ spec:
           spec:
             description: GohtpserverSpec defines the desired state of Gohtpserver
             properties:
-              foo:
+              image:
                 description: Foo is an example field of Gohtpserver. Edit gohtpserver_types.go
                   to remove/update
                 type: string
+              replicas:
+                type: integer
             type: object
           status:
             description: GohtpserverStatus defines the observed state of Gohtpserver
+            properties:
+              availablereplicas:
+                type: integer
             type: object
         type: object
     served: true
