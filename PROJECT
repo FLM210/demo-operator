@@ -1,0 +1,16 @@
+domain: dlbppx.online
+layout:
+- go.kubebuilder.io/v3
+projectName: demo-operator
+repo: github.com/FLM210/demo-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: dlbppx.online
+  group: apps
+  kind: Gohtpserver
+  path: github.com/FLM210/demo-operator/api/v1alpha1
+  version: v1alpha1
+version: "3"
