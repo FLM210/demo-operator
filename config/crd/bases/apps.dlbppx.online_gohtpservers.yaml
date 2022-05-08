@@ -15,7 +15,16 @@ spec:
     singular: gohtpserver
   scope: Namespaced
   versions:
-  - name: v1alpha1
+  - additionalPrinterColumns:
+    - description: Replicas of Gohttpserver
+      jsonPath: .spec.replicas
+      name: replicas
+      type: int
+    - description: Use Image
+      jsonPath: .spec.image
+      name: Image
+      type: string
+    name: v1alpha1
     schema:
       openAPIV3Schema:
         description: Gohtpserver is the Schema for the gohtpservers API
@@ -36,10 +45,15 @@ spec:
             description: GohtpserverSpec defines the desired state of Gohtpserver
             properties:
               image:
+                type: string
+              name:
                 description: Foo is an example field of Gohtpserver. Edit gohtpserver_types.go
                   to remove/update
                 type: string
+              namespace:
+                type: string
               replicas:
+                format: int32
                 type: integer
             type: object
           status:
