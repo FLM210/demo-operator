@@ -70,9 +70,9 @@ func (r *GohtpserverReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 		return ctrl.Result{}, err
 	}
 
-	log.Log.Info("Create Or Update fmeng etcd", "Service", or)
+	log.Log.Info("Create Or Update gohtpserver", "Service", or)
 
-	// CreateOrUpdate StatefulSet
+	// CreateOrUpdate Deployment
 	var dep appsv1.Deployment
 	dep.Name = Gohttpserver.Name
 	dep.Namespace = Gohttpserver.Namespace
@@ -83,7 +83,7 @@ func (r *GohtpserverReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 	if err != nil {
 		return ctrl.Result{}, err
 	}
-	log.Log.Info("Create Or Update fmeng etcd", "statefulset", or)
+	log.Log.Info("Create Or Update gohtpserver", "deployment", or)
 
 	return ctrl.Result{}, nil
 }
