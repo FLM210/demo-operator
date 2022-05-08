@@ -44,7 +44,7 @@ type GohtpserverStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
-//+kubebuilder:printcolumn:name="replicas",type="int",JSONPath=".spec.replicas",description="Replicas of Gohttpserver"
+//+kubebuilder:printcolumn:name="replicas",type="integer",JSONPath=".spec.replicas",description="Replicas of Gohttpserver"
 //+kubebuilder:printcolumn:name="Image",type="string",JSONPath=".spec.image",description="Use Image"
 // Gohtpserver is the Schema for the gohtpservers API
 type Gohtpserver struct {
