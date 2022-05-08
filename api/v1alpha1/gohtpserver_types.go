@@ -29,11 +29,13 @@ type GohtpserverSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of Gohtpserver. Edit gohtpserver_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	Image    string `json:"image,omitempty"`
+	Replicas int    `json:"replicas,omitempty"`
 }
 
 // GohtpserverStatus defines the observed state of Gohtpserver
 type GohtpserverStatus struct {
+	AvailableReplicas int `json:"availablereplicas,omitempty"`
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
