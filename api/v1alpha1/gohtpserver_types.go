@@ -29,8 +29,10 @@ type GohtpserverSpec struct {
 	// Important: Run "make" to regenerate code after modifying this file
 
 	// Foo is an example field of Gohtpserver. Edit gohtpserver_types.go to remove/update
-	Image    string `json:"image,omitempty"`
-	Replicas int    `json:"replicas,omitempty"`
+	Name      string `json:"name,omitempty"`
+	Namespace string `json:"namespace,omitempty"`
+	Image     string `json:"image,omitempty"`
+	Replicas  *int32 `json:"replicas,omitempty"`
 }
 
 // GohtpserverStatus defines the observed state of Gohtpserver
@@ -42,7 +44,8 @@ type GohtpserverStatus struct {
 
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
-
+//+kubebuilder:printcolumn:name="replicas",type="int",JSONPath=".spec.replicas",description="Replicas of Gohttpserver"
+//+kubebuilder:printcolumn:name="Image",type="string",JSONPath=".spec.image",description="Use Image"
 // Gohtpserver is the Schema for the gohtpservers API
 type Gohtpserver struct {
 	metav1.TypeMeta   `json:",inline"`

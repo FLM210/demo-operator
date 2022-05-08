@@ -19,9 +19,12 @@ package controllers
 import (
 	"context"
 
+	appsv1 "k8s.io/api/apps/v1"
+	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	appsv1alpha1 "github.com/FLM210/demo-operator/api/v1alpha1"
@@ -49,7 +52,38 @@ type GohtpserverReconciler struct {
 func (r *GohtpserverReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
-	// TODO(user): your logic here
+	var Gohttpserver appsv1alpha1.Gohtpserver
+	if err := r.Get(ctx, req.NamespacedName, &Gohttpserver); err != nil {
+		// EtcdCluster was gone，skip
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
+
+	// CreateOrUpdate Service
+	var svc corev1.Service
+	svc.Name = Gohttpserver.Name
+	svc.Namespace = Gohttpserver.Namespace
+	or, err := ctrl.CreateOrUpdate(ctx, r.Client, &svc, func() error {
+		MutateSvc(&Gohttpserver, &svc)
+		return controllerutil.SetControllerReference(&Gohttpserver, &svc, r.Scheme)
+	})
+	if err != nil {
+		return ctrl.Result{}, err
+	}
+
+	log.Log.Info("Create Or Update fmeng etcd", "Service", or)
+
+	// CreateOrUpdate StatefulSet
+	var dep appsv1.Deployment
+	dep.Name = Gohttpserver.Name
+	dep.Namespace = Gohttpserver.Namespace
+	or, err = ctrl.CreateOrUpdate(ctx, r.Client, &dep, func() error {
+		MutateDeployment(&Gohttpserver, &dep)
+		return controllerutil.SetControllerReference(&Gohttpserver, &dep, r.Scheme)
+	})
+	if err != nil {
+		return ctrl.Result{}, err
+	}
+	log.Log.Info("Create Or Update fmeng etcd", "statefulset", or)
 
 	return ctrl.Result{}, nil
 }
